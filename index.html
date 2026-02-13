@@ -1,0 +1,1621 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SollinPlayer | 一站式高品质音乐播放器</title>
+  <meta name="description" content="SollinPlayer 音乐播放器官网：本地与在线一体、逐字歌词、无损音质、云备份与多平台同步。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;family=Righteous&amp;display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #050b16;
+      --bg-soft: #0a1327;
+      --panel: rgba(10, 20, 42, 0.82);
+      --line: rgba(120, 214, 255, 0.24);
+      --text: #f2fbff;
+      --muted: #a5bad2;
+      --primary: #00d5ff;
+      --secondary: #ff7b54;
+      --accent: #7dff6f;
+      --cta: #2dff88;
+      --cta-hover: #15ef77;
+      --warning: #ffb347;
+      --glow-primary: rgba(0, 213, 255, 0.34);
+      --glow-cta: rgba(45, 255, 136, 0.42);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --shadow: 0 20px 56px rgba(0, 0, 0, 0.5);
+      --container: 1160px;
+      --spot-x: 50%;
+      --spot-y: 20%;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at 12% -8%, rgba(0, 213, 255, 0.52) 0%, rgba(0, 213, 255, 0) 42%),
+        radial-gradient(circle at 100% 0%, rgba(255, 123, 84, 0.46) 0%, rgba(255, 123, 84, 0) 40%),
+        radial-gradient(circle at 50% 120%, rgba(125, 255, 111, 0.22) 0%, rgba(125, 255, 111, 0) 44%),
+        linear-gradient(160deg, #040912 0%, #071022 42%, #040811 100%);
+      color: var(--text);
+      font-family: "Poppins", "PingFang SC", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overscroll-behavior-y: contain;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before {
+      opacity: 0.28;
+      background: repeating-linear-gradient(
+        115deg,
+        rgba(255, 255, 255, 0.08) 0 1px,
+        rgba(255, 255, 255, 0) 1px 78px
+      );
+      mask-image: radial-gradient(circle at center, #000 35%, rgba(0, 0, 0, 0) 88%);
+      animation: meshShift 24s linear infinite;
+    }
+
+    body::after {
+      background: radial-gradient(
+        380px circle at var(--spot-x) var(--spot-y),
+        rgba(0, 213, 255, 0.2),
+        rgba(0, 213, 255, 0) 68%
+      );
+      opacity: 0.72;
+      transition: opacity 180ms ease-out;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      position: relative;
+      overflow-x: clip;
+      isolation: isolate;
+    }
+
+    .shell::before,
+    .shell::after {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      pointer-events: none;
+      border-radius: 999px;
+      filter: blur(56px);
+      opacity: 0.52;
+    }
+
+    .shell::before {
+      width: min(52vw, 620px);
+      height: min(52vw, 620px);
+      background: radial-gradient(circle at 30% 30%, rgba(0, 213, 255, 0.82), rgba(0, 213, 255, 0));
+      top: 120px;
+      right: -220px;
+      animation: driftA 12s ease-in-out infinite alternate;
+    }
+
+    .shell::after {
+      width: min(40vw, 500px);
+      height: min(40vw, 500px);
+      background: radial-gradient(circle at 65% 40%, rgba(255, 123, 84, 0.72), rgba(255, 123, 84, 0));
+      left: -180px;
+      top: 740px;
+      animation: driftB 14s ease-in-out infinite alternate;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--container));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .topbar-wrap {
+      position: sticky;
+      top: 12px;
+      z-index: 20;
+      padding-top: 12px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: linear-gradient(110deg, rgba(8, 16, 34, 0.78), rgba(13, 30, 56, 0.7));
+      backdrop-filter: blur(14px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.34), 0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      background: linear-gradient(140deg, var(--primary), var(--secondary) 58%, var(--accent));
+      display: grid;
+      place-items: center;
+      font-family: "Righteous", sans-serif;
+      font-size: 16px;
+      color: #fff;
+      box-shadow: 0 0 26px rgba(0, 213, 255, 0.34);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-links a {
+      position: relative;
+      transition: color 220ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: #fff;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 220ms ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after {
+      transform: scaleX(1);
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1;
+      min-height: 44px;
+      min-width: 44px;
+      position: relative;
+      overflow: hidden;
+      transition: background-color 220ms ease, transform 220ms ease, box-shadow 220ms ease, color 220ms ease;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(108deg, var(--cta) 0%, #00d5ff 55%, #ffd166 120%);
+      color: #022516;
+      box-shadow: 0 12px 24px var(--glow-cta), 0 0 0 1px rgba(255, 255, 255, 0.18) inset;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      background: var(--cta-hover);
+      color: #01190f;
+      transform: translateY(-2px);
+      box-shadow: 0 16px 34px rgba(45, 255, 136, 0.42);
+    }
+
+    .btn-ghost {
+      background: rgba(10, 24, 45, 0.65);
+      color: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .btn-ghost:hover,
+    .btn-ghost:focus-visible {
+      background: rgba(13, 36, 67, 0.88);
+      box-shadow: 0 0 0 1px rgba(0, 213, 255, 0.24) inset;
+    }
+
+    .btn::after {
+      content: "";
+      position: absolute;
+      top: -120%;
+      left: -140%;
+      width: 60%;
+      height: 340%;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0));
+      transform: rotate(22deg);
+      transition: left 450ms ease;
+      pointer-events: none;
+    }
+
+    .btn:hover::after,
+    .btn:focus-visible::after {
+      left: 180%;
+    }
+
+    .hero {
+      padding: 72px 0 56px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(125, 255, 111, 0.48);
+      color: #d7ffe5;
+      background: linear-gradient(110deg, rgba(45, 255, 136, 0.16), rgba(0, 213, 255, 0.14));
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.16;
+    }
+
+    .hero h1 {
+      margin-top: 16px;
+      font-family: "Righteous", "Poppins", sans-serif;
+      font-size: clamp(40px, 5.4vw, 72px);
+      letter-spacing: 0.01em;
+      max-width: 11ch;
+      background: linear-gradient(96deg, #effdff 2%, #8eefff 38%, #9cffba 64%, #ffd4aa 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 36px rgba(0, 213, 255, 0.22);
+    }
+
+    .lead {
+      margin-top: 18px;
+      max-width: 52ch;
+      color: var(--muted);
+      font-size: clamp(15px, 2vw, 18px);
+      line-height: 1.72;
+    }
+
+    .hero-actions {
+      margin-top: 26px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-actions .btn-primary {
+      animation: ctaPulse 2.8s ease-in-out infinite;
+    }
+
+    .hero-wave {
+      margin-top: 18px;
+      width: fit-content;
+      display: flex;
+      align-items: flex-end;
+      gap: 5px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 213, 255, 0.28);
+      background: rgba(8, 23, 45, 0.62);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.24);
+    }
+
+    .hero-wave span {
+      width: 4px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--primary), var(--accent));
+      transform-origin: center bottom;
+      animation: equalizer 1.5s ease-in-out infinite;
+    }
+
+    .hero-wave span:nth-child(1) { height: 8px; animation-delay: 0.08s; }
+    .hero-wave span:nth-child(2) { height: 14px; animation-delay: 0.16s; }
+    .hero-wave span:nth-child(3) { height: 22px; animation-delay: 0.02s; }
+    .hero-wave span:nth-child(4) { height: 10px; animation-delay: 0.23s; }
+    .hero-wave span:nth-child(5) { height: 17px; animation-delay: 0.11s; }
+    .hero-wave span:nth-child(6) { height: 24px; animation-delay: 0.31s; }
+    .hero-wave span:nth-child(7) { height: 13px; animation-delay: 0.19s; }
+    .hero-wave span:nth-child(8) { height: 20px; animation-delay: 0.28s; }
+    .hero-wave span:nth-child(9) { height: 11px; animation-delay: 0.36s; }
+
+    .metrics {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: linear-gradient(160deg, rgba(8, 20, 42, 0.82), rgba(8, 14, 26, 0.72));
+      padding: 14px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .showcase {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 630px;
+    }
+
+    .showcase::before,
+    .showcase::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+    }
+
+    .showcase::before {
+      width: min(460px, 92vw);
+      aspect-ratio: 1;
+      background: conic-gradient(
+        from 120deg,
+        rgba(0, 213, 255, 0.38),
+        rgba(255, 123, 84, 0.25),
+        rgba(125, 255, 111, 0.34),
+        rgba(0, 213, 255, 0.38)
+      );
+      filter: blur(34px);
+      opacity: 0.95;
+      animation: spinAura 16s linear infinite;
+    }
+
+    .showcase::after {
+      width: min(420px, 84vw);
+      aspect-ratio: 1;
+      border: 1px dashed rgba(141, 239, 255, 0.42);
+      opacity: 0.34;
+      animation: spinAuraReverse 18s linear infinite;
+    }
+
+    .phone {
+      position: relative;
+      width: min(320px, 80vw);
+      aspect-ratio: 9 / 19.5;
+      border-radius: 36px;
+      padding: 12px;
+      background: linear-gradient(160deg, #0f1e37 0%, #060c17 100%);
+      border: 1px solid rgba(174, 235, 255, 0.3);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      z-index: 1;
+      backdrop-filter: blur(6px);
+    }
+
+    .phone::before {
+      content: "";
+      position: absolute;
+      width: 34%;
+      height: 14px;
+      border-radius: 999px;
+      background: #03050f;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 1px solid rgba(248, 250, 252, 0.08);
+    }
+
+    .phone::after {
+      content: "";
+      position: absolute;
+      top: -130%;
+      left: -145%;
+      width: 230%;
+      height: 220%;
+      background: linear-gradient(110deg, rgba(255, 255, 255, 0), rgba(186, 249, 255, 0.2), rgba(255, 255, 255, 0));
+      transform: rotate(22deg);
+      animation: phoneShine 4.2s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .showcase > .phone {
+      animation: floatMain 6.2s ease-in-out infinite;
+    }
+
+    .phone-screen {
+      height: 100%;
+      border-radius: 26px;
+      border: 1px dashed rgba(157, 217, 255, 0.45);
+      background: linear-gradient(180deg, rgba(0, 213, 255, 0.24), rgba(10, 17, 30, 0.94));
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 18px;
+      color: #d8def0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .phone-screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: inherit;
+    }
+
+    .phone.phone-media::before,
+    .phone.phone-media::after {
+      display: none;
+    }
+
+    .phone.phone-media .phone-screen {
+      padding: 0;
+      border: 0;
+      overflow: hidden;
+      background: #03070f;
+    }
+
+    .phone.phone-media .phone-screen img {
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .phone-secondary {
+      position: absolute;
+      width: min(220px, 54vw);
+      right: -6%;
+      bottom: 6%;
+      transform: rotate(10deg);
+      opacity: 0.95;
+      animation: floatTilt 7.2s ease-in-out infinite;
+    }
+
+    .phone-secondary .phone-screen {
+      background: linear-gradient(180deg, rgba(255, 123, 84, 0.2), rgba(8, 12, 22, 0.92));
+    }
+
+    .section {
+      padding: 72px 0;
+    }
+
+    .section-head {
+      margin-bottom: 22px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .section-head h2 {
+      font-size: clamp(28px, 3.8vw, 44px);
+      font-family: "Righteous", sans-serif;
+      letter-spacing: 0.01em;
+      background: linear-gradient(96deg, #f5fdff 0%, #85edff 60%, #ffcda6 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 58ch;
+      line-height: 1.7;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .feature-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      padding: 22px;
+      background: linear-gradient(160deg, rgba(9, 21, 42, 0.9), rgba(7, 14, 26, 0.92));
+      transition: transform 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+      cursor: pointer;
+      min-height: 210px;
+      overflow: hidden;
+    }
+
+    .feature-card:hover,
+    .feature-card:focus-within {
+      transform: translateY(-3px);
+      border-color: rgba(0, 213, 255, 0.52);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 213, 255, 0.2) inset;
+    }
+
+    .feature-card::after {
+      content: "";
+      position: absolute;
+      top: -140%;
+      left: -70%;
+      width: 45%;
+      height: 320%;
+      transform: rotate(24deg);
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(173, 235, 255, 0.24), rgba(255, 255, 255, 0));
+      transition: left 420ms ease;
+      pointer-events: none;
+    }
+
+    .feature-card:hover::after,
+    .feature-card:focus-within::after {
+      left: 148%;
+    }
+
+    .feature-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, rgba(0, 213, 255, 0.4), rgba(255, 123, 84, 0.32));
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      margin-bottom: 14px;
+    }
+
+    .feature-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: #fff;
+      stroke-width: 1.8;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .feature-card h3 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 14px;
+    }
+
+    .showcase-grid {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .shot {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      background: linear-gradient(160deg, rgba(9, 22, 43, 0.78), rgba(8, 14, 27, 0.82));
+      display: grid;
+      gap: 10px;
+      justify-items: center;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
+    }
+
+    .shot h3 {
+      margin: 0;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    .shot p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .shot .phone {
+      width: 100%;
+      max-width: 240px;
+      padding: 10px;
+      border-radius: 28px;
+    }
+
+    .shot .phone .phone-screen {
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(160deg, rgba(9, 22, 43, 0.82), rgba(8, 14, 25, 0.84));
+      padding: 22px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .panel h3 {
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+
+    .list {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      line-height: 1.64;
+      font-size: 14px;
+    }
+
+    .table {
+      margin-top: 12px;
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .table th,
+    .table td {
+      border-bottom: 1px solid rgba(148, 211, 252, 0.22);
+      text-align: left;
+      padding: 10px 0;
+      color: var(--muted);
+    }
+
+    .table th {
+      color: #fff;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.03em;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .pill {
+      border: 1px solid rgba(45, 255, 136, 0.38);
+      background: linear-gradient(110deg, rgba(45, 255, 136, 0.14), rgba(0, 213, 255, 0.12));
+      color: #d7ffe6;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .faq {
+      margin-top: 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .faq details {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: linear-gradient(160deg, rgba(8, 20, 40, 0.82), rgba(8, 12, 21, 0.82));
+      padding: 12px 14px;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .faq p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.68;
+      font-size: 14px;
+    }
+
+    .download {
+      position: relative;
+      overflow: hidden;
+      margin: 18px 0 72px;
+      border: 1px solid rgba(125, 255, 111, 0.46);
+      border-radius: 28px;
+      padding: 28px;
+      background: linear-gradient(120deg, rgba(8, 25, 49, 0.94), rgba(8, 14, 26, 0.96));
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+      align-items: center;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.3), 0 0 44px rgba(0, 213, 255, 0.16) inset;
+    }
+
+    .download::before {
+      content: "";
+      position: absolute;
+      inset: -40% -10%;
+      background: radial-gradient(circle at 20% 50%, rgba(0, 213, 255, 0.26), rgba(0, 213, 255, 0) 40%),
+        radial-gradient(circle at 78% 50%, rgba(255, 123, 84, 0.2), rgba(255, 123, 84, 0) 42%);
+      animation: driftC 12s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    .download > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .download h2 {
+      font-size: clamp(30px, 3.8vw, 44px);
+      font-family: "Righteous", sans-serif;
+      margin-bottom: 10px;
+    }
+
+    .download p {
+      margin: 0;
+      color: #d6e7ff;
+      line-height: 1.7;
+      max-width: 52ch;
+    }
+
+    .download-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .download .btn {
+      text-align: center;
+      justify-content: center;
+      display: inline-flex;
+      align-items: center;
+      min-height: 48px;
+    }
+
+    .mobile-download-fab {
+      display: none;
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: calc(12px + env(safe-area-inset-bottom));
+      z-index: 40;
+      border: 0;
+      border-radius: 999px;
+      min-height: 52px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: #031b10;
+      background: linear-gradient(108deg, var(--cta) 0%, #00d5ff 55%, #ffd166 120%);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.34), 0 10px 24px var(--glow-cta);
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .download-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: grid;
+      place-items: center;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 220ms ease, visibility 220ms ease;
+    }
+
+    .download-modal.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .download-modal__backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(3, 7, 15, 0.72);
+      backdrop-filter: blur(8px);
+    }
+
+    .download-modal__panel {
+      position: relative;
+      width: min(92vw, 720px);
+      border-radius: 26px;
+      border: 1px solid rgba(157, 217, 255, 0.35);
+      background: linear-gradient(160deg, rgba(8, 20, 41, 0.95), rgba(6, 13, 24, 0.96));
+      box-shadow: 0 20px 46px rgba(0, 0, 0, 0.45), 0 0 32px rgba(0, 213, 255, 0.14) inset;
+      padding: 24px;
+      transform: translateY(16px) scale(0.98);
+      transition: transform 240ms ease;
+    }
+
+    .download-modal.is-open .download-modal__panel {
+      transform: translateY(0) scale(1);
+    }
+
+    .download-modal__close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(14, 30, 52, 0.8);
+      color: #fff;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .download-modal__eyebrow {
+      margin: 0;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #8befff;
+      text-transform: uppercase;
+    }
+
+    .download-modal__title {
+      margin: 8px 0 8px;
+      font-size: clamp(26px, 4vw, 34px);
+      font-family: "Righteous", sans-serif;
+      letter-spacing: 0.01em;
+    }
+
+    .download-modal__desc {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .download-modal__grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .download-option {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      background: linear-gradient(160deg, rgba(8, 22, 44, 0.88), rgba(7, 13, 24, 0.9));
+      transition: border-color 220ms ease, box-shadow 220ms ease;
+    }
+
+    .download-option.is-focus {
+      border-color: rgba(45, 255, 136, 0.55);
+      box-shadow: 0 0 0 1px rgba(45, 255, 136, 0.28) inset;
+    }
+
+    .download-option h4 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .download-option p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .download-option__actions {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .download-option__actions .btn {
+      justify-content: center;
+      display: inline-flex;
+      align-items: center;
+      min-height: 46px;
+      width: 100%;
+      text-align: center;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    footer {
+      color: #9ea6bd;
+      font-size: 13px;
+      padding: 8px 0 36px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    @keyframes ctaPulse {
+      0%, 100% {
+        box-shadow: 0 12px 24px var(--glow-cta), 0 0 0 1px rgba(255, 255, 255, 0.18) inset;
+      }
+      50% {
+        box-shadow: 0 18px 36px rgba(45, 255, 136, 0.48), 0 0 0 1px rgba(255, 255, 255, 0.22) inset;
+      }
+    }
+
+    @keyframes equalizer {
+      0%, 100% { transform: scaleY(0.7); opacity: 0.55; }
+      40% { transform: scaleY(1.2); opacity: 1; }
+      70% { transform: scaleY(0.52); opacity: 0.62; }
+    }
+
+    @keyframes meshShift {
+      0% { transform: translate3d(-1.2%, 0, 0); }
+      100% { transform: translate3d(1.2%, 0.8%, 0); }
+    }
+
+    @keyframes driftA {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      100% { transform: translate3d(-24px, 16px, 0) scale(1.06); }
+    }
+
+    @keyframes driftB {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      100% { transform: translate3d(22px, -12px, 0) scale(0.95); }
+    }
+
+    @keyframes driftC {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(1.5%, -1.2%, 0); }
+    }
+
+    @keyframes spinAura {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes spinAuraReverse {
+      0% { transform: rotate(360deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    @keyframes floatMain {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-9px); }
+    }
+
+    @keyframes floatTilt {
+      0%, 100% { transform: rotate(10deg) translateY(0); }
+      50% { transform: rotate(8deg) translateY(-8px); }
+    }
+
+    @keyframes phoneShine {
+      0%, 100% { left: -145%; }
+      50% { left: 132%; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 420ms ease, transform 420ms ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--cta);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 1040px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .showcase {
+        min-height: 520px;
+      }
+
+      .feature-grid,
+      .showcase-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .split,
+      .download {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        width: min(calc(100% - 24px), var(--container));
+      }
+
+      .topbar-wrap {
+        top: 8px;
+        padding-top: calc(8px + env(safe-area-inset-top));
+      }
+
+      .topbar {
+        padding: 9px 12px;
+        gap: 10px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .topbar .btn {
+        padding-inline: 14px;
+        min-height: 42px;
+      }
+
+      .hero {
+        padding-top: 44px;
+      }
+
+      .hero-wave {
+        margin-top: 14px;
+      }
+
+      .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .metrics,
+      .feature-grid,
+      .showcase-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .phone-secondary {
+        display: none;
+      }
+
+      .section {
+        padding: 56px 0;
+      }
+
+      .download {
+        margin-bottom: 58px;
+        padding: 22px 18px;
+      }
+
+      .download-actions {
+        flex-direction: column;
+      }
+
+      .download-actions .btn {
+        width: 100%;
+      }
+
+      .mobile-download-fab {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .download-modal {
+        place-items: end center;
+      }
+
+      .download-modal__panel {
+        width: 100%;
+        max-width: none;
+        border-radius: 24px 24px 0 0;
+        padding: 20px 16px calc(20px + env(safe-area-inset-bottom));
+      }
+
+      .download-modal__grid {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        padding-bottom: calc(98px + env(safe-area-inset-bottom));
+      }
+    }
+
+    @media (max-width: 460px) {
+      .showcase {
+        min-height: 460px;
+      }
+
+      .phone {
+        width: min(286px, 82vw);
+      }
+
+      .metric strong {
+        font-size: 22px;
+      }
+
+      .download h2 {
+        font-size: clamp(26px, 9vw, 34px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      body::before,
+      body::after,
+      .showcase::before,
+      .showcase::after,
+      .phone::after,
+      .download::before {
+        animation: none !important;
+      }
+
+      .download-modal,
+      .download-modal__panel {
+        transition: none !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="container topbar-wrap">
+      <header class="topbar" aria-label="主导航">
+        <a class="brand" href="#top" aria-label="SollinPlayer 首页">
+          <span class="brand-mark" aria-hidden="true">S</span>
+          <span>SollinPlayer</span>
+        </a>
+        <nav class="nav-links" aria-label="页面导航">
+          <a href="#features">功能亮点</a>
+          <a href="#screens">产品演示</a>
+          <a href="#pro">赞助特权</a>
+          <a href="#faq">常见问题</a>
+        </nav>
+        <a class="btn btn-primary" href="#" data-download-open="all" aria-haspopup="dialog" aria-controls="downloadModal">立即下载</a>
+      </header>
+    </div>
+
+    <main id="top" class="container">
+      <section class="hero">
+        <div class="reveal">
+          <span class="eyebrow">iOS / Android / Navidrome</span>
+          <h1>把本地与在线音乐，合并成一台播放器。</h1>
+          <p class="lead">
+            SollinPlayer 提供本地音乐库、四大平台在线聚合、逐字歌词、无损音质、云备份与设备同步。
+            从收藏到下载，从歌词到主题，全链路围绕重度听歌体验设计。
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#" data-download-open="all" aria-haspopup="dialog" aria-controls="downloadModal">下载 iOS / Android</a>
+            <a class="btn btn-ghost" href="#screens">查看界面演示</a>
+          </div>
+          <div class="hero-wave" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="metrics" aria-label="关键能力数据">
+            <article class="metric">
+              <strong>10+</strong>
+              <span>主流音频格式支持</span>
+            </article>
+            <article class="metric">
+              <strong>4</strong>
+              <span>在线音乐平台聚合</span>
+            </article>
+            <article class="metric">
+              <strong>14档</strong>
+              <span>歌词字体与行距精调</span>
+            </article>
+          </div>
+        </div>
+
+        <div class="showcase reveal" aria-label="首屏应用界面演示">
+          <article class="phone phone-media" role="img" aria-label="SollinPlayer 首页资料库界面">
+            <div class="phone-screen">
+              <img src="截图/首页资料库.webp" alt="SollinPlayer 首页资料库界面" />
+            </div>
+          </article>
+
+          <article class="phone phone-secondary phone-media" role="img" aria-label="SollinPlayer 在线推荐歌单界面">
+            <div class="phone-screen">
+              <img src="截图/在线推荐歌单.webp" alt="SollinPlayer 在线推荐歌单界面" loading="lazy" decoding="async" />
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="section-head reveal">
+          <h2>功能矩阵</h2>
+          <p>基于《功能大全》梳理，官网重点展示 6 组能力：本地库、播放器、歌词、在线音乐、服务器与云备份，覆盖日常听歌到深度管理场景。</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card reveal" tabindex="0" aria-label="本地音乐库">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M7 6h10M7 10h7M7 14h10M7 18h7"/></svg>
+            </div>
+            <h3>本地音乐库</h3>
+            <p>自动扫描与手动刷新，支持 MP3 / FLAC / WAV / AAC / OGG / M4A，提供 A-Z 索引、当前歌曲定位、多选批量管理。</p>
+          </article>
+
+          <article class="feature-card reveal" tabindex="0" aria-label="播放器控制">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M8 6v12l10-6z"/><path d="M4 4v16"/></svg>
+            </div>
+            <h3>播放器控制</h3>
+            <p>顺序/列表循环/单曲循环/随机播放，支持进度拖动、音量滑块、迷你播放器、睡眠定时器和竖屏/横屏歌词布局切换。</p>
+          </article>
+
+          <article class="feature-card reveal" tabindex="0" aria-label="歌词体验">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h16"/></svg>
+            </div>
+            <h3>歌词体验</h3>
+            <p>支持内嵌 LRC、外挂 LRC、TTML 逐字歌词与双语翻译。歌词进度可按歌曲独立偏移，支持字体、行距、模糊强度细调。</p>
+          </article>
+
+          <article class="feature-card reveal" tabindex="0" aria-label="在线音乐聚合">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+            </div>
+            <h3>在线音乐聚合</h3>
+            <p>wyy、QQ、kw、kg 平台搜索与榜单整合，支持歌单收藏、外链导入、单曲与批量下载、音质等级与并发策略控制。</p>
+          </article>
+
+          <article class="feature-card reveal" tabindex="0" aria-label="Navidrome 连接">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M8 7h.01M8 17h.01"/></svg>
+            </div>
+            <h3>Navidrome 连接</h3>
+            <p>支持多服务器管理、连通性测试、发现页推荐、歌单/收藏同步，以及服务器歌曲与专辑下载到本地。</p>
+          </article>
+
+          <article class="feature-card reveal" tabindex="0" aria-label="账户与云备份">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3v6"/><path d="M7 7h10"/><path d="M5 11v7a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3v-7"/></svg>
+            </div>
+            <h3>账户与云备份</h3>
+            <p>邮箱注册登录、验证码校验、设备绑定与远程解绑。支持喜欢歌曲、歌单与在线收藏的云备份、历史恢复与版本管理。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="screens">
+        <div class="section-head reveal">
+          <h2>产品界面</h2>
+          <p>从播放、歌词到在线榜单，核心场景都围绕高频听歌操作进行优化，保证信息密度和沉浸感并存。</p>
+        </div>
+
+        <div class="showcase-grid">
+          <article class="shot reveal">
+            <h3>播放页 / 动态封面</h3>
+            <p>播放进度、歌词同步与控制区一屏联动。</p>
+            <div class="phone phone-media" role="img" aria-label="播放页与歌词界面">
+              <div class="phone-screen">
+                <img src="截图/播放歌词页面.webp" alt="SollinPlayer 播放页与歌词界面" loading="lazy" decoding="async" />
+              </div>
+            </div>
+          </article>
+
+          <article class="shot reveal">
+            <h3>歌词页 / 逐字高亮</h3>
+            <p>支持逐字歌词、行距字体与延迟校准设置。</p>
+            <div class="phone phone-media" role="img" aria-label="歌词设置界面">
+              <div class="phone-screen">
+                <img src="截图/播放歌词设置.webp" alt="SollinPlayer 歌词设置界面" loading="lazy" decoding="async" />
+              </div>
+            </div>
+          </article>
+
+          <article class="shot reveal">
+            <h3>发现页 / 在线聚合</h3>
+            <p>在线榜单、热歌趋势与多平台内容聚合。</p>
+            <div class="phone phone-media" role="img" aria-label="在线榜单界面">
+              <div class="phone-screen">
+                <img src="截图/在线榜单页面.webp" alt="SollinPlayer 在线榜单界面" loading="lazy" decoding="async" />
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="pro">
+        <div class="section-head reveal">
+          <h2>高阶体验</h2>
+          <p>面向进阶用户，提供更完整的歌词、音色与主题控制能力，让播放器更贴近你的个人听感与使用习惯。</p>
+        </div>
+
+        <div class="split">
+          <article class="panel reveal">
+            <h3>赞助专属能力</h3>
+            <ul class="list">
+              <li>逐字歌词（YRC）卡拉 OK 式高亮</li>
+              <li>TTML Apple Music 风格逐字时间轴</li>
+              <li>自动封面取色 + 自定义 RGB 主题色</li>
+              <li>下载并发 1-5 线程可调</li>
+              <li>LX 音源数量不受限，多设备绑定</li>
+            </ul>
+            <div class="pill-row" aria-label="赞助标签">
+              <span class="pill">歌词进阶</span>
+              <span class="pill">主题定制</span>
+              <span class="pill">高速下载</span>
+              <span class="pill">多设备</span>
+            </div>
+          </article>
+
+          <article class="panel reveal" aria-label="平台支持与系统要求">
+            <h3>平台与系统支持</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>项目</th>
+                  <th>说明</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>移动系统</td>
+                  <td>iOS 12.0+ / Android 6.0+</td>
+                </tr>
+                <tr>
+                  <td>在线平台</td>
+                  <td>wyy、QQ、kw、kg</td>
+                </tr>
+                <tr>
+                  <td>云服务</td>
+                  <td>账户、设备、备份、恢复</td>
+                </tr>
+                <tr>
+                  <td>服务器连接</td>
+                  <td>Navidrome 多服务器切换</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="faq">
+        <div class="section-head reveal">
+          <h2>常见问题</h2>
+          <p>便于官网首发时快速答疑，减少下载页与社群重复解释成本。</p>
+        </div>
+
+        <div class="faq">
+          <details class="reveal">
+            <summary>这款播放器只支持本地音乐吗？</summary>
+            <p>不是。它同时支持本地库管理与在线平台搜索/下载，也支持连接 Navidrome 私有音乐服务器。</p>
+          </details>
+          <details class="reveal">
+            <summary>歌词可以逐字同步吗？</summary>
+            <p>支持。可读取 LRC、TTML 等格式，并在可用音源条件下展示逐字高亮与双语歌词。</p>
+          </details>
+        </div>
+      </section>
+
+      <section class="download reveal" id="download" aria-label="下载区">
+        <div>
+          <h2>立即开始你的高品质听歌体验</h2>
+          <p>下载 SollinPlayer，在一处完成本地音乐管理、在线聚合搜索、歌词沉浸播放和云端同步。支持 iOS 与 Android。</p>
+        </div>
+        <div class="download-actions">
+          <a class="btn btn-primary" href="#" data-download-open="ios" aria-label="下载 iOS 版本" aria-haspopup="dialog" aria-controls="downloadModal">下载 iOS 版</a>
+          <a class="btn btn-primary" href="#" data-download-open="android" aria-label="下载 Android 版本" aria-haspopup="dialog" aria-controls="downloadModal">下载 Android 版</a>
+          <a class="btn btn-ghost" href="#" aria-label="查看更新日志">查看更新日志</a>
+        </div>
+      </section>
+
+      <footer>
+        <span>© <span id="year"></span> SollinPlayer. All rights reserved.</span>
+        <span>SollinPlayer 高品质音乐播放器</span>
+      </footer>
+    </main>
+  </div>
+
+  <button class="mobile-download-fab" type="button" data-download-open="all" aria-haspopup="dialog" aria-controls="downloadModal">
+    立即下载 App
+  </button>
+
+  <div class="download-modal" id="downloadModal" aria-hidden="true">
+    <div class="download-modal__backdrop" data-download-close></div>
+    <section class="download-modal__panel" role="dialog" aria-modal="true" aria-labelledby="downloadModalTitle">
+      <button class="download-modal__close" type="button" aria-label="关闭下载弹窗" data-download-close>&times;</button>
+      <p class="download-modal__eyebrow">Download</p>
+      <h3 class="download-modal__title" id="downloadModalTitle">选择下载渠道</h3>
+      <p class="download-modal__desc">优先使用主下载链接；如遇网络波动或下载中断，请使用备用下载链接。</p>
+
+      <div class="download-modal__grid">
+        <article class="download-option" data-platform-card="ios">
+          <h4>iOS</h4>
+          <p>适用于 iPhone / iPad，支持 iOS 12.0 及以上。</p>
+          <div class="download-option__actions">
+            <a class="btn btn-primary" href="https://example.com/sollinplayer-ios.ipa" target="_blank" rel="noopener noreferrer">主下载链接</a>
+            <a class="btn btn-ghost" href="https://example.com/sollinplayer-ios-backup.ipa" target="_blank" rel="noopener noreferrer">备用下载链接</a>
+          </div>
+        </article>
+
+        <article class="download-option" data-platform-card="android">
+          <h4>Android</h4>
+          <p>适用于 Android 6.0 及以上系统。</p>
+          <div class="download-option__actions">
+            <a class="btn btn-primary" href="https://example.com/sollinplayer-android.apk" target="_blank" rel="noopener noreferrer">主下载链接</a>
+            <a class="btn btn-ghost" href="https://example.com/sollinplayer-android-backup.apk" target="_blank" rel="noopener noreferrer">备用下载链接</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    const observers = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.12 }
+    );
+
+    observers.forEach((node) => io.observe(node));
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!prefersReducedMotion) {
+      const root = document.documentElement;
+      const moveSpotlight = (event) => {
+        const x = (event.clientX / window.innerWidth) * 100;
+        const y = (event.clientY / window.innerHeight) * 100;
+        root.style.setProperty("--spot-x", `${x.toFixed(2)}%`);
+        root.style.setProperty("--spot-y", `${y.toFixed(2)}%`);
+      };
+      window.addEventListener("pointermove", moveSpotlight, { passive: true });
+    }
+
+    const downloadModal = document.getElementById("downloadModal");
+    const downloadOpeners = document.querySelectorAll("[data-download-open]");
+    const downloadClosers = document.querySelectorAll("[data-download-close]");
+    const platformCards = downloadModal ? downloadModal.querySelectorAll("[data-platform-card]") : [];
+    let modalLastActive = null;
+
+    const setModalPlatformFocus = (platform) => {
+      platformCards.forEach((card) => {
+        const active = platform !== "all" && card.dataset.platformCard === platform;
+        card.classList.toggle("is-focus", active);
+      });
+
+      if (platform === "all" || !downloadModal) return;
+      const activeCard = downloadModal.querySelector(`[data-platform-card="${platform}"]`);
+      if (!activeCard) return;
+      activeCard.scrollIntoView({ block: "nearest", behavior: prefersReducedMotion ? "auto" : "smooth" });
+    };
+
+    const openDownloadModal = (platform = "all", trigger = null) => {
+      if (!downloadModal) return;
+      modalLastActive = trigger || document.activeElement;
+      setModalPlatformFocus(platform);
+      downloadModal.classList.add("is-open");
+      downloadModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+      const closeBtn = downloadModal.querySelector(".download-modal__close");
+      if (closeBtn) closeBtn.focus({ preventScroll: true });
+      if (navigator.vibrate) navigator.vibrate(10);
+    };
+
+    const closeDownloadModal = () => {
+      if (!downloadModal) return;
+      downloadModal.classList.remove("is-open");
+      downloadModal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+      platformCards.forEach((card) => card.classList.remove("is-focus"));
+      if (modalLastActive && typeof modalLastActive.focus === "function") {
+        modalLastActive.focus({ preventScroll: true });
+      }
+    };
+
+    downloadOpeners.forEach((opener) => {
+      opener.addEventListener("click", (event) => {
+        event.preventDefault();
+        openDownloadModal(opener.dataset.downloadOpen || "all", opener);
+      });
+    });
+
+    downloadClosers.forEach((closer) => {
+      closer.addEventListener("click", closeDownloadModal);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && downloadModal && downloadModal.classList.contains("is-open")) {
+        closeDownloadModal();
+      }
+    });
+  </script>
+</body>
+</html>
