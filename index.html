@@ -1502,7 +1502,7 @@
     <div class="download-modal__backdrop" data-download-close></div>
     <section class="download-modal__panel" role="dialog" aria-modal="true" aria-labelledby="downloadModalTitle">
       <button class="download-modal__close" type="button" aria-label="关闭下载弹窗" data-download-close>&times;</button>
-      <p class="download-modal__eyebrow">Download｜v1.0.2</p>
+      <p class="download-modal__eyebrow">Download｜v1.0.3</p>
       <h3 class="download-modal__title" id="downloadModalTitle">选择下载渠道</h3>
       <p class="download-modal__desc">优先使用主下载链接；如遇网络波动或下载中断，请使用备用下载链接。</p>
 
@@ -1511,8 +1511,8 @@
           <h4>iOS</h4>
           <p>适用于 iPhone / iPad，支持 iOS 12.0 及以上。</p>
           <div class="download-option__actions">
-            <a class="btn btn-primary" href="https://pan.ymxx.net/f/BkXfl/SollinPlayer-v1.0.2.ipa" target="_blank" rel="noopener noreferrer">主下载链接</a>
-            <a class="btn btn-ghost" href="https://share.feijipan.com/s/HpQcYWOm" target="_blank" rel="noopener noreferrer">备用下载链接</a>
+            <a class="btn btn-primary" href="https://pan.ymxx.net/f/eqkId/SollinPlayer-v1.0.3.ipa" target="_blank" rel="noopener noreferrer">主下载链接</a>
+            <a class="btn btn-ghost" href="https://share.feijipan.com/s/2wQwYo6c" target="_blank" rel="noopener noreferrer">备用下载链接</a>
           </div>
         </article>
 
@@ -1520,8 +1520,8 @@
           <h4>Android</h4>
           <p>适用于 Android 6.0 及以上系统。</p>
           <div class="download-option__actions">
-            <a class="btn btn-primary" href="https://pan.ymxx.net/f/xKXsz/SollinPlayer-v1.0.2.apk" target="_blank" rel="noopener noreferrer">主下载链接</a>
-            <a class="btn btn-ghost" href="https://share.feijipan.com/s/HpQcYWOm" target="_blank" rel="noopener noreferrer">备用下载链接</a>
+            <a class="btn btn-primary" href="https://pan.ymxx.net/f/OwnC6/%28%E4%BC%98%E5%85%88%E4%B8%8B%E8%BD%BD%29SollinPlayer-v1.0.3-64%E4%BD%8D.apk" target="_blank" rel="noopener noreferrer">主下载链接</a>
+            <a class="btn btn-ghost" href="https://share.feijipan.com/s/2wQwYo6c" target="_blank" rel="noopener noreferrer">备用下载链接</a>
           </div>
         </article>
       </div>
@@ -1536,31 +1536,69 @@
       <h3 class="download-modal__title" id="changelogModalTitle">更新日志</h3>
       <div class="download-modal__content" style="max-height: 60vh; overflow-y: auto; text-align: left; margin-top: 20px; padding-right: 10px;">
         
-        <!-- v1.0.2 -->
+        <!-- v1.0.3 -->
         <div style="margin-bottom: 32px;">
-          <h4 style="border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 16px; font-size: 1.4em; color: #fff;">v1.0.2</h4>
+          <h4 style="border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 16px; font-size: 1.4em; color: #fff;">v1.0.3</h4>
           
-          <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">修复项</h5>
-          <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
-            <li>修复QQ音乐在后台不会自动切换下一首的问题</li>
-            <li>修复搜索结果的批量喜欢和下载按钮超出屏幕显示范围的问题</li>
-            <li>修复歌单详情页无批量操作按钮的问题</li>
-            <li>修复底部菜单栏配置后重启APP延迟生效的问题</li>
-            <li>修复iOS灵动岛点击无法进入APP的问题</li>
-          </ul>
-
-          <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">优化项</h5>
-          <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
-            <li>音质检测逻辑优化：改为串行执行并增加1秒延时（规避并发限制）</li>
-            <li>音源检测逻辑优化：改为串行检测</li>
-            <li>优化自动播放降级策略</li>
-          </ul>
-
           <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">新增功能</h5>
           <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
-            <li>新增直接导入音频文件到播放器文件列表的功能</li>
+            <li>安卓平台新增自定义下载目录、自定义扫描目录、扫描歌曲时长限制功能</li>
+            <li>新增悬浮式迷你播放器样式，支持长按移动位置</li>
+            <li>新增收藏歌曲、自建歌单内部排序功能</li>
+            <li>新增快速收藏歌曲按钮</li>
+            <li>滑动歌词支持修改歌曲进度</li>
+            <li>歌曲下载元数据内嵌到歌曲文件（解决部分APP无法识别外挂元数据的问题）</li>
+            <li>在线歌单内部添加搜索框</li>
+            <li>点击批量收藏支持选择歌单/喜欢</li>
+          </ul>
+
+          <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">问题修复</h5>
+          <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+            <li>修复歌单内播放全部需要开启增强的问题</li>
+            <li>修复软件使用过程中卡顿发热的问题</li>
+            <li>修复音质选择重启APP后恢复默认的问题</li>
+            <li>修复在线歌单随机播放/循环播放异常的问题</li>
+            <li>修复歌词翻译、罗马音设置无法持久化保存的问题</li>
+          </ul>
+
+          <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">体验优化</h5>
+          <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+            <li>平台切换按钮调整为居中显示</li>
+            <li>迷你播放器和底部菜单模糊效果支持关闭（默认关闭）</li>
+            <li>优化部分UI按钮的布局显示</li>
+            <li>删除部分专辑图片显示，降低图片渲染压力</li>
+            <li>优化从歌曲列表听歌的加载速度，实现秒点秒播</li>
+            <li>优化逐字歌词显示时的抖动问题</li>
+            <li>优化部分UI显示效果</li>
           </ul>
         </div>
+
+        <!-- v1.0.2 -->
+        <details>
+          <summary style="cursor: pointer; padding: 12px 0; border-top: 1px solid var(--line); font-size: 1.2em; font-weight: 600; color: var(--muted);">v1.0.2 更新记录</summary>
+          <div style="padding-top: 8px;">
+            <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">修复项</h5>
+            <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+              <li>修复QQ音乐在后台不会自动切换下一首的问题</li>
+              <li>修复搜索结果的批量喜欢和下载按钮超出屏幕显示范围的问题</li>
+              <li>修复歌单详情页无批量操作按钮的问题</li>
+              <li>修复底部菜单栏配置后重启APP延迟生效的问题</li>
+              <li>修复iOS灵动岛点击无法进入APP的问题</li>
+            </ul>
+
+            <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">优化项</h5>
+            <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+              <li>音质检测逻辑优化：改为串行执行并增加1秒延时（规避并发限制）</li>
+              <li>音源检测逻辑优化：改为串行检测</li>
+              <li>优化自动播放降级策略</li>
+            </ul>
+
+            <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">新增功能</h5>
+            <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+              <li>新增直接导入音频文件到播放器文件列表的功能</li>
+            </ul>
+          </div>
+        </details>
 
         <!-- v1.0.1 -->
         <details>
