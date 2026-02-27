@@ -1502,7 +1502,7 @@
     <div class="download-modal__backdrop" data-download-close></div>
     <section class="download-modal__panel" role="dialog" aria-modal="true" aria-labelledby="downloadModalTitle">
       <button class="download-modal__close" type="button" aria-label="关闭下载弹窗" data-download-close>&times;</button>
-      <p class="download-modal__eyebrow">Download｜v1.0.5</p>
+      <p class="download-modal__eyebrow">Download｜v1.1.0</p>
       <h3 class="download-modal__title" id="downloadModalTitle">选择下载渠道</h3>
       <p class="download-modal__desc">优先使用主下载链接；如遇网络波动或下载中断，请使用备用下载链接。</p>
 
@@ -1511,8 +1511,8 @@
           <h4>iOS</h4>
           <p>适用于 iPhone / iPad，支持 iOS 12.0 及以上。</p>
           <div class="download-option__actions">
-            <a class="btn btn-primary" href="https://pan.ymxx.net/f/83yC9/sollinplayer1.0.5.ipa" target="_blank" rel="noopener noreferrer">主下载链接</a>
-            <a class="btn btn-ghost" href="https://share.feijipan.com/s/c9QuTJxl" target="_blank" rel="noopener noreferrer">备用下载链接</a>
+            <a class="btn btn-primary" href="https://pan.ymxx.net/f/DpjHM/SollinPlayer1.1.0.ipa" target="_blank" rel="noopener noreferrer">主下载链接</a>
+            <a class="btn btn-ghost" href="https://share.feijipan.com/s/t81ByO3H" target="_blank" rel="noopener noreferrer">备用下载链接</a>
           </div>
         </article>
 
@@ -1520,8 +1520,8 @@
           <h4>Android</h4>
           <p>适用于 Android 6.0 及以上系统。</p>
           <div class="download-option__actions">
-            <a class="btn btn-primary" href="https://pan.ymxx.net/f/M06Te/sollinplayer1.0.5.apk" target="_blank" rel="noopener noreferrer">主下载链接</a>
-            <a class="btn btn-ghost" href="https://share.feijipan.com/s/c9QuTJxl" target="_blank" rel="noopener noreferrer">备用下载链接</a>
+            <a class="btn btn-primary" href="https://pan.ymxx.net/f/jXaIR/Sollinplayer1.1.0.apk" target="_blank" rel="noopener noreferrer">主下载链接</a>
+            <a class="btn btn-ghost" href="https://share.feijipan.com/s/t81ByO3H" target="_blank" rel="noopener noreferrer">备用下载链接</a>
           </div>
         </article>
       </div>
@@ -1536,33 +1536,73 @@
       <h3 class="download-modal__title" id="changelogModalTitle">更新日志</h3>
       <div class="download-modal__content" style="max-height: 60vh; overflow-y: auto; text-align: left; margin-top: 20px; padding-right: 10px;">
         
-        <!-- v1.0.5 -->
+        <!-- v1.1.0 -->
         <div style="margin-bottom: 32px;">
-          <h4 style="border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 16px; font-size: 1.4em; color: #fff;">v1.0.5</h4>
+          <h4 style="border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 16px; font-size: 1.4em; color: #fff;">v1.1.0</h4>
           
           <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">新增功能</h5>
           <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
-            <li>新增Apple Music风格播放器界面(部分参考了同类优秀软件CyreneMusic)</li>
-            <li>新增播放界面状态持久化功能（从播放界面返回后再次进入，保留上次退出时的界面状态）</li>
-            <li>新增歌曲歌词前奏脉冲进度条</li>
-            <li>新增歌词底部控件自动隐藏开关</li>
-            <li>下载管理模块新增多项管理功能</li>
-            <li>本地资料库新增三种排序方式</li>
+            <li>彻彻底底重构在线页面并更名为「发现」</li>
+            <li>新增启动软件自动播放音乐功能</li>
+            <li>新增启动软件自动同步导入的外部歌单功能</li>
+            <li>新增在线搜索预测词展示</li>
+            <li>新增MV搜索与播放功能</li>
+            <li>新增歌单广场模块</li>
+            <li>新增iOS通知栏灵动岛歌词显示</li>
+            <li>新增安卓悬浮歌词功能</li>
+            <li>新增适配魅族状态栏歌词显示</li>
+            <li>新增下载歌曲时将所有元数据（歌词、歌手、歌名、专辑）内嵌到歌曲文件</li>
+            <li>新增自选是否下载外挂歌词/封面的开关</li>
+            <li>新增已下载歌曲标识（卡片右上角绿色丝带），降低重复下载率</li>
+            <li>新增后端网关服务器更换功能</li>
+            <li>新增安装状态栏导航栏沉浸</li>
           </ul>
 
           <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">问题修复</h5>
           <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
-            <li>修复部分功能延迟加载的问题</li>
-            <li>修复无法准确定位正在播放歌曲位置的问题</li>
+             <li>修复点击随机播放后歌曲信息混乱的问题</li>
+             <li>修复在线播放时刷新资料库打断播放的问题</li>
+             <li>修复外部歌单无法全量导入的问题</li>
+             <li>修复本地添加歌单面板无法滑动的问题</li>
+             <li>修复部分手机通知栏暂停后无法继续播放的问题</li>
           </ul>
 
           <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">体验优化</h5>
           <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
-            <li>优化歌词滚动动画效果</li>
-            <li>优化一键反馈BUG的流程，提升反馈便捷性</li>
-            <li>优化软件图标视觉效果</li>
+            <li>优化大部分UI显示效果，提升视觉体验</li>
+            <li>优化Apple Music样式逐字歌词特效</li>
+            <li>焕新应用图标视觉设计</li>
           </ul>
         </div>
+
+        <!-- v1.0.5 -->
+        <details>
+          <summary style="cursor: pointer; padding: 12px 0; border-top: 1px solid var(--line); font-size: 1.2em; font-weight: 600; color: var(--muted);">v1.0.5 更新记录</summary>
+          <div style="padding-top: 8px;">
+            <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">新增功能</h5>
+            <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+              <li>新增Apple Music风格播放器界面(部分参考了同类优秀软件CyreneMusic)</li>
+              <li>新增播放界面状态持久化功能（从播放界面返回后再次进入，保留上次退出时的界面状态）</li>
+              <li>新增歌曲歌词前奏脉冲进度条</li>
+              <li>新增歌词底部控件自动隐藏开关</li>
+              <li>下载管理模块新增多项管理功能</li>
+              <li>本地资料库新增三种排序方式</li>
+            </ul>
+
+            <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">问题修复</h5>
+            <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+              <li>修复部分功能延迟加载的问题</li>
+              <li>修复无法准确定位正在播放歌曲位置的问题</li>
+            </ul>
+
+            <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">体验优化</h5>
+            <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+              <li>优化歌词滚动动画效果</li>
+              <li>优化一键反馈BUG的流程，提升反馈便捷性</li>
+              <li>优化软件图标视觉效果</li>
+            </ul>
+          </div>
+        </details>
 
         <!-- v1.0.4 -->
         <details>
