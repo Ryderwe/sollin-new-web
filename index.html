@@ -1505,7 +1505,7 @@
     <div class="download-modal__backdrop" data-download-close></div>
     <section class="download-modal__panel" role="dialog" aria-modal="true" aria-labelledby="downloadModalTitle">
       <button class="download-modal__close" type="button" aria-label="关闭下载弹窗" data-download-close>&times;</button>
-      <p class="download-modal__eyebrow">Download｜v1.1.2</p>
+      <p class="download-modal__eyebrow">Download｜v1.1.4</p>
       <h3 class="download-modal__title" id="downloadModalTitle">选择下载渠道</h3>
       <p class="download-modal__desc">优先使用主下载链接；如遇网络波动或下载中断，请使用备用下载链接。</p>
 
@@ -1514,8 +1514,8 @@
           <h4>iOS</h4>
           <p>适用于 iPhone / iPad，支持 iOS 12.0 及以上。</p>
           <div class="download-option__actions">
-            <a class="btn btn-primary" href="https://pan.ymxx.net/f/3O3Uw/SollinPlayer1.1.2.ipa" target="_blank" rel="noopener noreferrer">主下载链接</a>
-            <a class="btn btn-ghost" href="https://share.feijipan.com/s/hH1XE2w7" target="_blank" rel="noopener noreferrer">备用下载链接</a>
+            <a class="btn btn-primary" href="https://pan.ymxx.net/f/y6wsA/SollinPlayer.ipa" target="_blank" rel="noopener noreferrer">主下载链接</a>
+            <a class="btn btn-ghost" href="https://share.feijipan.com/s/Qj14txlL" target="_blank" rel="noopener noreferrer">备用下载链接</a>
           </div>
         </article>
 
@@ -1523,8 +1523,8 @@
           <h4>Android</h4>
           <p>适用于 Android 6.0 及以上系统。</p>
           <div class="download-option__actions">
-            <a class="btn btn-primary" href="https://pan.ymxx.net/f/2K4CA/Sollin1.1.2.apk" target="_blank" rel="noopener noreferrer">主下载链接</a>
-            <a class="btn btn-ghost" href="https://share.feijipan.com/s/hH1XE2w7" target="_blank" rel="noopener noreferrer">备用下载链接</a>
+            <a class="btn btn-primary" href="https://pan.ymxx.net/f/EEbSr/SollinPlayer1.1.4_arm64-v8a.apk" target="_blank" rel="noopener noreferrer">主下载链接</a>
+            <a class="btn btn-ghost" href="https://share.feijipan.com/s/Qj14txlL" target="_blank" rel="noopener noreferrer">备用下载链接</a>
           </div>
         </article>
       </div>
@@ -1539,35 +1539,57 @@
       <h3 class="download-modal__title" id="changelogModalTitle">更新日志</h3>
       <div class="download-modal__content" style="max-height: 60vh; overflow-y: auto; text-align: left; margin-top: 20px; padding-right: 10px;">
         
-        <!-- v1.1.2 -->
+        <!-- v1.1.4 -->
         <div style="margin-bottom: 32px;">
-          <h4 style="border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 16px; font-size: 1.4em; color: #fff;">v1.1.2</h4>
+          <h4 style="border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 16px; font-size: 1.4em; color: #fff;">v1.1.4</h4>
           
           <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">新增功能</h5>
           <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
-            <li>新增设置项配置模块，丰富个性化定制能力</li>
-            <li>新增资料库排列方式（支持列表、卡片两种样式切换）</li>
-            <li>新增赞助用户专属播放界面（实验性功能）</li>
-            <li>新增支持自定义头像&昵称</li>
-            <li>新增聚合搜索功能</li>
-            <li>安卓端新增支持将本软件设为本地默认音乐应用（可直接打开文件夹内的音乐文件）</li>
+            <li>新增网易云音源点击爱心同步至网易云官方收藏的功能</li>
+            <li>新增支持将网易云个人主页添加到顶部标签页（可手动关闭）</li>
+            <li>新增发现页面自定义排序功能（支持平台排序、标签排序）</li>
+            <li>新增Apple Music样式的TTML歌词识别（支持内嵌式、外挂式TTML歌词）</li>
           </ul>
 
           <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">问题修复</h5>
           <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
-             <li>修复更多面板字体显示模糊、看不清的问题</li>
-             <li>修复酷狗歌单仅能加载30首歌曲的限制问题</li>
-             <li>修复歌单导入数量存在上限的问题</li>
-             <li>修复自建歌单缺少“移出歌单”选项的问题</li>
-             <li>修复网易云每日推荐页面无返回按钮的问题</li>
-             <li>修复随机播放功能异常的问题</li>
-          </ul>
-
-          <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">体验优化</h5>
-          <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
-            <li>无（本次更新以功能新增和问题修复为主）</li>
+            <li>修复随机播放功能异常的问题</li>
+            <li>修复添加歌曲到“下一首播放”功能失效的问题</li>
+            <li>修复小芸音源封面显示异常的问题</li>
+            <li>修复其他多项已知BUG，提升应用稳定性</li>
           </ul>
         </div>
+
+        <!-- v1.1.2 -->
+        <details>
+          <summary style="cursor: pointer; padding: 12px 0; border-top: 1px solid var(--line); font-size: 1.2em; font-weight: 600; color: var(--muted);">v1.1.2 更新记录</summary>
+          <div style="padding-top: 8px;">
+            <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">新增功能</h5>
+            <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+              <li>新增设置项配置模块，丰富个性化定制能力</li>
+              <li>新增资料库排列方式（支持列表、卡片两种样式切换）</li>
+              <li>新增赞助用户专属播放界面（实验性功能）</li>
+              <li>新增支持自定义头像&昵称</li>
+              <li>新增聚合搜索功能</li>
+              <li>安卓端新增支持将本软件设为本地默认音乐应用（可直接打开文件夹内的音乐文件）</li>
+            </ul>
+
+            <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">问题修复</h5>
+            <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+               <li>修复更多面板字体显示模糊、看不清的问题</li>
+               <li>修复酷狗歌单仅能加载30首歌曲的限制问题</li>
+               <li>修复歌单导入数量存在上限的问题</li>
+               <li>修复自建歌单缺少“移出歌单”选项的问题</li>
+               <li>修复网易云每日推荐页面无返回按钮的问题</li>
+               <li>修复随机播放功能异常的问题</li>
+            </ul>
+
+            <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">体验优化</h5>
+            <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+              <li>无（本次更新以功能新增和问题修复为主）</li>
+            </ul>
+          </div>
+        </details>
 
         <!-- v1.1.1 -->
         <details>
