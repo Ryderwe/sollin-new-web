@@ -1504,7 +1504,7 @@
     <div class="download-modal__backdrop" data-download-close></div>
     <section class="download-modal__panel" role="dialog" aria-modal="true" aria-labelledby="downloadModalTitle">
       <button class="download-modal__close" type="button" aria-label="关闭下载弹窗" data-download-close>&times;</button>
-      <p class="download-modal__eyebrow">Download｜v1.1.4</p>
+      <p class="download-modal__eyebrow">Download｜v1.1.5</p>
       <h3 class="download-modal__title" id="downloadModalTitle">选择下载渠道</h3>
       <p class="download-modal__desc">优先使用主下载链接；如遇网络波动或下载中断，请使用备用下载链接。</p>
 
@@ -1513,8 +1513,8 @@
           <h4>iOS</h4>
           <p>适用于 iPhone / iPad，支持 iOS 13.0 及以上。</p>
           <div class="download-option__actions">
-            <a class="btn btn-primary" href="https://pan.ymxx.net/f/y6wsA/SollinPlayer.ipa" target="_blank" rel="noopener noreferrer">主下载链接</a>
-            <a class="btn btn-ghost" href="https://share.feijipan.com/s/Qj14txlL" target="_blank" rel="noopener noreferrer">备用下载链接</a>
+            <a class="btn btn-primary" href="https://pan.ymxx.net/f/kzgCl/SollinPlayer.ipa" target="_blank" rel="noopener noreferrer">主下载链接</a>
+            <a class="btn btn-ghost" href="https://share.feijipan.com/s/Nt17KBrY" target="_blank" rel="noopener noreferrer">备用下载链接</a>
           </div>
         </article>
 
@@ -1522,8 +1522,8 @@
           <h4>Android</h4>
           <p>适用于 Android 6.0 及以上系统。</p>
           <div class="download-option__actions">
-            <a class="btn btn-primary" href="https://pan.ymxx.net/f/EEbSr/SollinPlayer1.1.4_arm64-v8a.apk" target="_blank" rel="noopener noreferrer">主下载链接</a>
-            <a class="btn btn-ghost" href="https://share.feijipan.com/s/Qj14txlL" target="_blank" rel="noopener noreferrer">备用下载链接</a>
+             <a class="btn btn-primary" href="https://pan.ymxx.net/f/ZQPSv/SollinPlayer1.1.5_arm64-v8a.apk" target="_blank" rel="noopener noreferrer">主下载链接</a>
+            <a class="btn btn-ghost" href="https://share.feijipan.com/s/Nt17KBrY" target="_blank" rel="noopener noreferrer">备用下载链接</a>
           </div>
         </article>
 
@@ -1559,26 +1559,66 @@
       <h3 class="download-modal__title" id="changelogModalTitle">更新日志</h3>
       <div class="download-modal__content" style="max-height: 60vh; overflow-y: auto; text-align: left; margin-top: 20px; padding-right: 10px;">
         
-        <!-- v1.1.4 -->
+        <!-- v1.1.5 -->
         <div style="margin-bottom: 32px;">
-          <h4 style="border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 16px; font-size: 1.4em; color: #fff;">v1.1.4</h4>
+          <h4 style="border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 16px; font-size: 1.4em; color: #fff;">v1.1.5</h4>
           
           <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">新增功能</h5>
           <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
-            <li>新增网易云音源点击爱心同步至网易云官方收藏的功能</li>
-            <li>新增支持将网易云个人主页添加到顶部标签页（可手动关闭）</li>
-            <li>新增发现页面自定义排序功能（支持平台排序、标签排序）</li>
-            <li>新增Apple Music样式的TTML歌词识别（支持内嵌式、外挂式TTML歌词）</li>
+            <li>新增本地音乐资料库「我的喜欢」卡片（可在设置中开启/关闭）</li>
+            <li>新增WebDAV备份功能，支持备份本地以外的全量数据（含在线歌单、网易云Cookie、在线喜欢、LX音源、设置项等）</li>
+            <li>新增自定义是否预加载下一首播放链接的功能（支持高度自定义配置）</li>
+            <li>新增音源不可用自动降级逻辑：音质逐级降级至最低后自动切换音源，切换时触发提示</li>
+            <li>新增历史播放记录功能（本地记录在资料库顶部搜索框左侧，在线记录在在线浏览界面）</li>
+            <li>新增在线播放进度保留功能（重启应用后可直接恢复上次播放进度）</li>
+            <li>新增缓存管理开关：支持关闭整体缓存、单独关闭歌曲播放缓存</li>
+            <li>新增全屏模式（可以隐藏状态栏和底部小白条三大金刚）</li>
+            <li>新增支持导入lx官方的歌单（从lxapp点击导出.lxmc）</li>
+            <li>支持清空播放队列</li>
+            <li>全局常驻菜单栏和迷你播放器</li>
+          </ul>
+
+          <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">体验优化</h5>
+          <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+            <li>优化整体UI显示效果，提升视觉体验</li>
+            <li>优化歌曲移出歌单的操作流程，提升便捷性</li>
+            <li>优化切歌速度，实现无感切换</li>
           </ul>
 
           <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">问题修复</h5>
           <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
-            <li>修复随机播放功能异常的问题</li>
-            <li>修复添加歌曲到“下一首播放”功能失效的问题</li>
-            <li>修复小芸音源封面显示异常的问题</li>
-            <li>修复其他多项已知BUG，提升应用稳定性</li>
+            <li>修复APP自动播放存在的问题</li>
+            <li>修复安卓扫描本地资料库会重复的问题</li>
+            <li>修复网易云二维码登录</li>
+          </ul>
+
+          <h5 style="color: var(--warning); margin: 16px 0 8px; font-size: 1.1em;">重要提醒</h5>
+          <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+            <li>下个版本即将下线云备份功能，有数据的记得备份</li>
           </ul>
         </div>
+
+        <!-- v1.1.4 -->
+        <details>
+          <summary style="cursor: pointer; padding: 12px 0; border-top: 1px solid var(--line); font-size: 1.2em; font-weight: 600; color: var(--muted);">v1.1.4 更新记录</summary>
+          <div style="padding-top: 8px;">
+            <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">新增功能</h5>
+            <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+              <li>新增网易云音源点击爱心同步至网易云官方收藏的功能</li>
+              <li>新增支持将网易云个人主页添加到顶部标签页（可手动关闭）</li>
+              <li>新增发现页面自定义排序功能（支持平台排序、标签排序）</li>
+              <li>新增Apple Music样式的TTML歌词识别（支持内嵌式、外挂式TTML歌词）</li>
+            </ul>
+
+            <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">问题修复</h5>
+            <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+              <li>修复随机播放功能异常的问题</li>
+              <li>修复添加歌曲到“下一首播放”功能失效的问题</li>
+              <li>修复小芸音源封面显示异常的问题</li>
+              <li>修复其他多项已知BUG，提升应用稳定性</li>
+            </ul>
+          </div>
+        </details>
 
         <!-- v1.1.2 -->
         <details>
