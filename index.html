@@ -1504,26 +1504,26 @@
     <div class="download-modal__backdrop" data-download-close></div>
     <section class="download-modal__panel" role="dialog" aria-modal="true" aria-labelledby="downloadModalTitle">
       <button class="download-modal__close" type="button" aria-label="关闭下载弹窗" data-download-close>&times;</button>
-      <p class="download-modal__eyebrow">Download｜v1.1.7</p>
+      <p class="download-modal__eyebrow">Download｜v1.2.0</p>
       <h3 class="download-modal__title" id="downloadModalTitle">选择下载渠道</h3>
-      <p class="download-modal__desc">优先使用主下载链接；如遇网络波动或下载中断，请使用备用下载链接。</p>
+      <p class="download-modal__desc">优先使用主下载链接；如遇网络波动、下载中断或需其他架构版本，请使用备用下载链接。</p>
 
       <div class="download-modal__grid">
         <article class="download-option" data-platform-card="ios">
           <h4>iOS</h4>
           <p>适用于 iPhone / iPad，支持 iOS 13.0 及以上。</p>
           <div class="download-option__actions">
-            <a class="btn btn-primary" href="https://pan.ymxx.net/s/jvUn" target="_blank" rel="noopener noreferrer">主下载链接</a>
-            <a class="btn btn-ghost" href="https://pan.ymxx.net/s/jvUn" target="_blank" rel="noopener noreferrer">备用下载链接</a>
+            <a class="btn btn-primary" href="https://pan.ymxx.net/f/5eWsZ/SollinPlayer1.2.0+40.ipa" target="_blank" rel="noopener noreferrer">主下载链接</a>
+            <a class="btn btn-ghost" href="https://share.feijipan.com/s/sL2k9AW4" target="_blank" rel="noopener noreferrer">备用下载链接</a>
           </div>
         </article>
 
         <article class="download-option" data-platform-card="android">
           <h4>Android</h4>
-          <p>适用于 Android 6.0 及以上系统。</p>
+          <p>适用于 Android 6.0 及以上系统，其他架构点击备用下载。</p>
           <div class="download-option__actions">
-             <a class="btn btn-primary" href="https://pan.ymxx.net/s/jvUn" target="_blank" rel="noopener noreferrer">主下载链接</a>
-            <a class="btn btn-ghost" href="https://pan.ymxx.net/s/jvUn" target="_blank" rel="noopener noreferrer">备用下载链接</a>
+             <a class="btn btn-primary" href="https://pan.ymxx.net/f/w39TA/SollinPlayer1.2.0+40_arm64-v8a.apk" target="_blank" rel="noopener noreferrer">主下载链接</a>
+            <a class="btn btn-ghost" href="https://share.feijipan.com/s/sL2k9AW4" target="_blank" rel="noopener noreferrer">备用下载链接</a>
           </div>
         </article>
 
@@ -1559,31 +1559,65 @@
       <h3 class="download-modal__title" id="changelogModalTitle">更新日志</h3>
       <div class="download-modal__content" style="max-height: 60vh; overflow-y: auto; text-align: left; margin-top: 20px; padding-right: 10px;">
         
-        <!-- v1.1.7 -->
+        <!-- v1.2.0+40 -->
         <div style="margin-bottom: 32px;">
-          <h4 style="border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 16px; font-size: 1.4em; color: #fff;">v1.1.7</h4>
+          <h4 style="border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 16px; font-size: 1.4em; color: #fff;">v1.2.0（40）</h4>
+
+          <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">重磅更新</h5>
+          <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+            <li>新增 CarPlay 支持（自签可能无权限，需巨魔或参与 TestFlight 测试）</li>
+          </ul>
           
           <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">新增功能</h5>
           <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
-            <li>支持字幕逐字显示</li>
-            <li>新增黑胶播放器界面</li>
-            <li>适配TV版本遥控器控制</li>
-            <li>testflight版本固定为1.1.6，后续仅更新构建号，不影响其他版本</li>
+            <li>新增实验性新 UI 界面（当前免费开放，后续优化后可能仅对赞助用户开放）</li>
+            <li>新增歌曲无法播放时自动跨平台搜索（默认跨平台固定为酷我）</li>
+            <li>新增播放失败自动切下一曲，不再重复播放当前歌曲</li>
+            <li>全页面支持歌曲多种排序方式，支持自定义排序</li>
+            <li>新增独立搜索功能</li>
+            <li>新增返回顶部功能</li>
+            <li>多个页面添加批量操作按钮</li>
           </ul>
 
           <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">问题修复</h5>
           <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
-            <li>修复安卓播放m4a格式无声问题（建议转格式，m4a格式本身兼容性较差）</li>
-            <li>修复在线喜欢的歌曲播放时，通知栏无时间进度的问题</li>
-            <li>修复暂停过久后恢复播放，无法切换下一曲的问题</li>
-            <li>修复一堆bug</li>
+            <li>修复 Apple Music 样式进度条颜色问题</li>
+            <li>修复手机恢复电脑端数据时喜欢的歌曲无法正常显示的问题</li>
+            <li>移除 TestFlight 版本音源隐藏限制，现在常驻显示</li>
           </ul>
 
           <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">体验优化</h5>
           <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
-            <li>优化界面UI显示效果</li>
+            <li>优化用户卡片显示</li>
           </ul>
         </div>
+
+        <!-- v1.1.7 -->
+        <details>
+          <summary style="cursor: pointer; padding: 12px 0; border-top: 1px solid var(--line); font-size: 1.2em; font-weight: 600; color: var(--muted);">v1.1.7 更新记录</summary>
+          <div style="padding-top: 8px;">
+            <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">新增功能</h5>
+            <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+              <li>支持字幕逐字显示</li>
+              <li>新增黑胶播放器界面</li>
+              <li>适配TV版本遥控器控制</li>
+              <li>testflight版本固定为1.1.6，后续仅更新构建号，不影响其他版本</li>
+            </ul>
+
+            <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">问题修复</h5>
+            <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+              <li>修复安卓播放m4a格式无声问题（建议转格式，m4a格式本身兼容性较差）</li>
+              <li>修复在线喜欢的歌曲播放时，通知栏无时间进度的问题</li>
+              <li>修复暂停过久后恢复播放，无法切换下一曲的问题</li>
+              <li>修复一堆bug</li>
+            </ul>
+
+            <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">体验优化</h5>
+            <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+              <li>优化界面UI显示效果</li>
+            </ul>
+          </div>
+        </details>
 
         <!-- v1.1.6+33 -->
         <details>
