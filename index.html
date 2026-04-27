@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;family=Righteous&amp;display=swap" rel="stylesheet" />
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="33bf0d13-0b5c-40af-bdd8-d237a3a6db6f"></script>
   <style>
     :root {
       --bg: #050b16;
@@ -971,6 +972,13 @@
       gap: 8px;
     }
 
+    .download-option__meta {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
     .download-option__actions .btn {
       justify-content: center;
       display: inline-flex;
@@ -1504,27 +1512,31 @@
     <div class="download-modal__backdrop" data-download-close></div>
     <section class="download-modal__panel" role="dialog" aria-modal="true" aria-labelledby="downloadModalTitle">
       <button class="download-modal__close" type="button" aria-label="关闭下载弹窗" data-download-close>&times;</button>
-      <p class="download-modal__eyebrow">Download｜手机端 v1.2.5+10000｜PC v1.2.7</p>
+      <p class="download-modal__eyebrow">Download｜手机端 v1.3.8+10008｜PC v1.2.7</p>
       <h3 class="download-modal__title" id="downloadModalTitle">选择下载渠道</h3>
-      <p class="download-modal__desc">优先使用主下载链接；如遇网络波动、下载中断或需其他架构版本，请使用备用下载链接。</p>
+      <p class="download-modal__desc">手机端已更新到 v1.3.8+10008，提供小飞机分享页与直链下载；安卓可按设备架构直接选择安装包。</p>
 
       <div class="download-modal__grid">
         <article class="download-option" data-platform-card="ios">
           <h4>iOS</h4>
-          <p>适用于 iPhone / iPad，支持 iOS 13.0 及以上。</p>
+          <p>适用于 iPhone / iPad，支持 iOS 13.0 及以上，提供 IPA 自签包。</p>
           <div class="download-option__actions">
-            <a class="btn btn-primary" href="https://pan.sollin.top/@s/2qpegFPG" target="_blank" rel="noopener noreferrer">主下载链接</a>
-            <a class="btn btn-ghost" href="https://pan.sollin.top/@s/2qpegFPG" target="_blank" rel="noopener noreferrer">备用下载链接</a>
+            <a class="btn btn-primary" href="https://share.feijipan.com/s/nz4GJpeI" target="_blank" rel="noopener noreferrer">小飞机下载</a>
+            <a class="btn btn-ghost" href="https://pan.ymxx.net/f/DwziM/SollinPlayer1.3.8.ipa" target="_blank" rel="noopener noreferrer">IPA 直链</a>
           </div>
+          <p class="download-option__meta">iOS 安装如需签名，请使用自签工具或个人证书导入 IPA。</p>
         </article>
 
         <article class="download-option" data-platform-card="android">
           <h4>Android</h4>
-          <p>适用于 Android 6.0 及以上系统，其他架构点击备用下载。</p>
+          <p>适用于 Android 6.0 及以上系统，提供全架构安装包。</p>
           <div class="download-option__actions">
-             <a class="btn btn-primary" href="https://pan.sollin.top/@s/2qpegFPG" target="_blank" rel="noopener noreferrer">主下载链接</a>
-            <a class="btn btn-ghost" href="https://pan.sollin.top/@s/2qpegFPG" target="_blank" rel="noopener noreferrer">备用下载链接</a>
+            <a class="btn btn-primary" href="https://share.feijipan.com/s/nz4GJpeI" target="_blank" rel="noopener noreferrer">小飞机下载</a>
+            <a class="btn btn-ghost" href="https://pan.ymxx.net/f/z37hD/SollinPlayer1.3.8_arm64-v8a.apk" target="_blank" rel="noopener noreferrer">ARM64 直链</a>
+            <a class="btn btn-ghost" href="https://pan.ymxx.net/f/ve6IZ/SollinPlayer1.3.8_32bit.apk" target="_blank" rel="noopener noreferrer">32 位直链</a>
+            <a class="btn btn-ghost" href="https://pan.ymxx.net/f/qg1Ck/SollinPlayer1.3.8_x86_64.apk" target="_blank" rel="noopener noreferrer">x86_64 直链</a>
           </div>
+          <p class="download-option__meta">大部分新机型优先选择 ARM64；老设备可尝试 32 位包，模拟器或特殊设备可使用 x86_64。</p>
         </article>
 
         <article class="download-option" data-platform-card="windows">
@@ -1559,6 +1571,37 @@
       <h3 class="download-modal__title" id="changelogModalTitle">更新日志</h3>
       <div class="download-modal__content" style="max-height: 60vh; overflow-y: auto; text-align: left; margin-top: 20px; padding-right: 10px;">
         
+        <!-- v1.3.8+10008 -->
+        <div style="margin-bottom: 32px;">
+          <h4 style="border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 16px; font-size: 1.4em; color: #fff;">v1.3.8（10008）</h4>
+
+          <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">新功能</h5>
+          <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+            <li>新增一个播放界面“微信聊天”</li>
+            <li>在线喜欢新增定位和随机播放按钮</li>
+            <li>新增两个平台切换样式（悬浮球、标签、下拉列表）</li>
+            <li>在线顶部搜索卡片支持隐藏</li>
+          </ul>
+
+          <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">修复</h5>
+          <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+            <li>修复了小芸每日推荐显示异常问题</li>
+            <li>修复酷我没有歌词的问题</li>
+            <li>修复云备份失败的问题</li>
+            <li>修复无法跨平台换源的问题</li>
+          </ul>
+
+          <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">变更</h5>
+          <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+            <li>取消歌词自动换源（bug 太多了）</li>
+          </ul>
+
+          <h5 style="color: var(--primary); margin: 16px 0 8px; font-size: 1.1em;">优化</h5>
+          <ul style="padding-left: 20px; margin: 0; line-height: 1.6; color: var(--muted); list-style-type: disc;">
+            <li>优化侧边栏用户卡片样式</li>
+          </ul>
+        </div>
+
         <!-- v1.2.5+10000 -->
         <div style="margin-bottom: 32px;">
           <h4 style="border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 16px; font-size: 1.4em; color: #fff;">v1.2.5（10000）</h4>
